@@ -2,6 +2,7 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.3.3'
 	id 'io.spring.dependency-management' version '1.1.6'
+	id 'nu.studer.jooq' version '8.2'  // jOOQ Gradle 플러그인
 }
 
 group = 'com.practice'
@@ -31,6 +32,10 @@ repositories {
 }
 
 dependencies {
+	implementation 'org.jooq:jooq:3.18.0'  // jOOQ 라이브러리
+    implementation 'org.jooq:jooq-meta:3.18.0'
+    implementation 'org.jooq:jooq-codegen:3.18.0'
+
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-jooq'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
@@ -38,9 +43,7 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
 	annotationProcessor 'org.projectlombok:lombok'
-	
-	implementation("org.jooq:jooq-meta-extensions-hibernate:3.19.11")
-	
+	 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
@@ -48,4 +51,41 @@ dependencies {
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+jooq {
+    version = '3.18.0'  // 사용하고자 하는 jOOQ 버전
+    edition = nu.studer.gradle.jooq.JooqEdition.OSS  // Enum 타입으로 변경
+
+    configurations {
+        main {  // 기본 설정
+            generateSchemaSourceOnCompilation = true  // 컴파일 시 자동으로 소스 생성
+            generationTool {
+	            jdbc {
+	                driver = 'com.mysql.cj.jdbc.Driver'
+	                url = 'jdbc:mariadb://localhost:3306/jooq'
+	                user = 'root'
+	                password = '1234'
+	            }
+	            generator {
+	                name = 'org.jooq.codegen.DefaultGenerator'
+	                database {
+	                    name = 'org.jooq.meta.mariadb.MariaDBDatabase'
+	                    inputSchema = 'public'  // 스키마 설정
+	                }
+	                generate {
+	                    relations = true
+	                    deprecated = false
+	                    records = true
+	                    immutablePojos = true
+	                    fluentSetters = true
+	                }
+	                target {
+	                    packageName = 'com.practice.practice_jooq.generated'  // 생성될 클래스의 패키지
+	                    directory = 'src/main/java'  // 소스 생성 위치
+	                }
+	            }
+            }
+        }
+    }
 }
