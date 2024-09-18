@@ -1,0 +1,30 @@
+# application.yml은 스프링 부트가 사용하는 설정 파일이고, persistence.xml은 JPA가 사용하는 설정
+# 스프링 부트가 내부에서 JPA를 만들 때 persistence.xml 없이도 동작하도록 구현 -> persistence.xml 불필요
+
+server:
+  port: 9000
+
+spring:
+  datasource:
+    url: jdbc:mariadb://localhost:3306/jooq
+    username: root	
+    password: 1234
+    driver-class-name: org.mariadb.jdbc.Driver
+    
+  jpa:
+    hibernate:
+      ddl-auto: create # 생성했으니 주석 / 개발 중에는 계속 켜두기
+      show_sql: true	# QueryDSL에서 빌더 역할을 하는 JPQL 로그 보기
+    properties:
+      hibernate:
+        #show_sql: true
+        format_sql: true
+   
+  security:
+    user:
+      name: test
+      password: 1234
+      
+logging.level:
+  org.hibernate.SQL: debug
+  org.hibernate.type: trace # 파라미터까지 보는 옵션
