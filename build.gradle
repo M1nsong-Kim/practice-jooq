@@ -76,7 +76,7 @@ jooq {
 	                }
 	                target {
 	                    packageName = 'com.practice.practice_jooq.generated'  // 생성될 클래스의 패키지
-	                    directory = 'src/main/java'  // 소스 생성 위치 -> 여기로 해두면 기존 소스들이 다 삭제됨
+	                    directory = 'src/main/generated'  // 소스 생성 위치 -> src/java/main 해두면 기존 소스들이 다 삭제됨
 	                }
 	            }
             }
