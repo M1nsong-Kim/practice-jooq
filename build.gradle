@@ -65,7 +65,7 @@ jooq {
 	                name = 'org.jooq.codegen.DefaultGenerator'
 	                database {
 	                    name = 'org.jooq.meta.mariadb.MariaDBDatabase'
-	                    inputSchema = 'public'  // 스키마 설정
+	                    inputSchema = 'jooq'  // 스키마 설정
 	                }
 	                generate {
 	                    relations = true
