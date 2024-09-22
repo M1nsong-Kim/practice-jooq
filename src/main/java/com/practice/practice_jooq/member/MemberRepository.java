@@ -1,21 +1,7 @@
 package com.practice.practice_jooq.member;
 
-import static com.practice.practice_jooq.generated.tables.Member.MEMBER;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
+public interface MemberRepository extends JpaRepository<Member, String>, MemberRepositoryJooq{
 
-import org.jooq.DSLContext;
-
-public class MemberRepository {
-	private final DSLContext dsl;
-
-	public MemberRepository(DSLContext dsl) {
-		this.dsl = dsl;
-	}
-	
-	public List<MemberDto> getMemberList(){
-		return dsl.select()
-				.from(MEMBER)
-				.fetchInto(MemberDto.class);
-	}
 }
