@@ -1,10 +1,15 @@
 package com.practice.practice_jooq;
 
-import org.jooq.DSLContext;
+import java.util.List;
+
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.practice.practice_jooq.member.Member;
+import com.practice.practice_jooq.member.MemberDto;
+import com.practice.practice_jooq.member.MemberRepository;
 
 @SpringBootTest
 class PracticeJooqApplicationTests {
@@ -18,18 +23,34 @@ class PracticeJooqApplicationTests {
 	 */
 	// 테스트 코드에 아무것도 없을 때 @SpringBootTest 어노테이션을 없애면 된다
 	
-	private final DSLContext dsl;
-
-	public PracticeJooqApplicationTests(DSLContext dsl) {
-		this.dsl = dsl;
-	}
+	@Autowired
+	MemberRepository memberRepository;
+	
+//	@BeforeEach
+//	public void 기본형주입() {
+//		Member member = Member.builder
+//	}
 	
 	@Test
-	public void 쿼리시험() {
+	public void JpaJooqTest() {
 		// given
+		Member member1 = new Member("id1", "pwd1", "user1", 971009);
+		Member member2 = Member.builder()
+								.id("id2")
+								.password("pwd2")
+								.name("user2")
+								.idNumber(010101)
+								.build();
+		memberRepository.save(member1);
+		memberRepository.save(member2);
+		
 
 		// when
+		List<MemberDto> results = memberRepository.getMemberList();
 		
 		// then
+		Assertions.assertEquals(results.size(), 2);
+		
 	}
 }
+

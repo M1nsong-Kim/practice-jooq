@@ -2,7 +2,7 @@ package com.practice.practice_jooq.member;
 
 import org.springframework.data.annotation.Id;
 
-import com.practice.practice_jooq.base.BaseEntity;
+import com.practice.practice_jooq.base.BaseTimeEntity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -21,7 +21,7 @@ import lombok.ToString;
 @NoArgsConstructor // 기본 생성자를 생성(둘중 하나만 쓰면 @Buider 오류)
 @AllArgsConstructor // 모든 필드를 포함하는 생성자를 생성
 @Builder // 빌더 패턴을 생성	
-public class Member extends BaseEntity {
+public class Member extends BaseTimeEntity {
 	@Id
 	private String id;
 	
