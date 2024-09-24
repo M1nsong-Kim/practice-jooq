@@ -9,10 +9,10 @@ import org.springframework.context.annotation.Bean;
 // @EntityScan(basePackages = "com.practice.practice_jooq.member")	// PracticeJooqApplicationTests > contextLoads() FAILED  조치였지만 해결X
 public class PracticeJooqApplication {
 	
-	@Bean
-	public DefaultDSLContext dsl(org.jooq.Configuration config) {
-		return new DefaultDSLContext(config);
-	}
+//	@Bean
+//	public DefaultDSLContext dsl(org.jooq.Configuration config) {
+//		return new DefaultDSLContext(config);
+//	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(PracticeJooqApplication.class, args);

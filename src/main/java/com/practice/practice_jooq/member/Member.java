@@ -1,11 +1,10 @@
 package com.practice.practice_jooq.member;
 
-import org.springframework.data.annotation.Id;
-
 import com.practice.practice_jooq.base.BaseTimeEntity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
