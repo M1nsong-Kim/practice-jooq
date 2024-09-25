@@ -5,7 +5,6 @@ import static com.practice.practice_jooq.generated.tables.Member.MEMBER;
 import java.util.List;
 
 import org.jooq.DSLContext;
-import org.springframework.beans.factory.annotation.Autowired;
 
 public class MemberRepositoryJooqImpl implements MemberRepositoryJooq{
 	

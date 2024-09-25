@@ -29,5 +29,5 @@ public class Member extends BaseTimeEntity {
 	private String name;
 	
 	@Column(name = "id_number")
-	private Integer idNumber;	// 주민번호 앞자리. 추후 나이 계산
+	private String idNumber;	// 주민번호 앞자리. 추후 나이 계산
 }
