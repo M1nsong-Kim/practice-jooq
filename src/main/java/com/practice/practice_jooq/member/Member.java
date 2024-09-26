@@ -1,9 +1,14 @@
 package com.practice.practice_jooq.member;
 
 import com.practice.practice_jooq.base.BaseTimeEntity;
+import com.practice.practice_jooq.categories.Grade;
+import com.practice.practice_jooq.categories.Role;
 
+import io.micrometer.common.lang.Nullable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -30,4 +35,11 @@ public class Member extends BaseTimeEntity {
 	
 	@Column(name = "id_number")
 	private String idNumber;	// 주민번호 앞자리. 추후 나이 계산
+	
+	@Enumerated(EnumType.STRING)
+	private Role role;
+	
+	@Enumerated(EnumType.STRING) 
+	@Nullable	// user만 grade 있음
+	private Grade grade;
 }
