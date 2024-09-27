@@ -31,9 +31,6 @@ public class Purchase extends BaseEntity {
 	@Column(name="purchase_id")
 	private Integer purchaseId;
 	
-	@Column(name="member_id")
-	private String memberId;
-	
 	@Column(name="product_id")
 	private String productId;
 	

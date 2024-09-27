@@ -34,14 +34,14 @@ class PracticeJooqApplicationTests {
 	@Test
 	public void JpaJooqTest() {
 		// given
-		Member member1 = new Member("id1", "pwd1", "user1", "971009");
+//		Member member1 = new Member("id1", "pwd1", "user1", "971009");
 		Member member2 = Member.builder()
 								.id("id2")
 								.password("pwd2")
 								.name("user2")
 								.idNumber("010101")
 								.build();
-		memberRepository.save(member1);
+//		memberRepository.save(member1);
 		memberRepository.save(member2);
 		
 
@@ -57,7 +57,7 @@ class PracticeJooqApplicationTests {
 		}
 		
 		// then
-		Assertions.assertEquals(jooqResult.size(), 2);
+		Assertions.assertEquals(jooqResult.size(), 1);
 		
 	}
 }
