@@ -1,12 +1,16 @@
 package com.practice.practice_jooq;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.practice.practice_jooq.categories.Grade;
+import com.practice.practice_jooq.categories.Role;
 import com.practice.practice_jooq.member.Member;
 import com.practice.practice_jooq.member.MemberDto;
 import com.practice.practice_jooq.member.MemberRepository;
@@ -26,10 +30,44 @@ class PracticeJooqApplicationTests {
 	@Autowired
 	MemberRepository memberRepository;
 	
-//	@BeforeEach
-//	public void 기본형주입() {
-//		Member member = Member.builder
-//	}
+	@BeforeEach
+	public void 회원주입() {
+		List<Member> memberList = new ArrayList<>();
+		
+		Member member1 = Member.builder()
+							.id("id111")
+							.password("1111")
+							.name("회원1")
+							.idNumber("010101")
+							.role(Role.USER)
+							.grade(Grade.GOLD)
+							.build();
+		Member member2 = Member.builder()
+				.id("id222")
+				.password("2222")
+				.name("회원2")
+				.idNumber("020202")
+				.role(Role.USER)
+				.grade(Grade.BRONZE)
+				.build();
+		Member member3 = Member.builder()
+				.id("id333")
+				.password("3333")
+				.name("회원3")
+				.idNumber("030303")
+				.role(Role.USER)
+				.grade(Grade.BRONZE)
+				.build();
+		
+		
+		memberList.add(member1);
+		memberList.add(member2);
+		memberList.add(member3);
+		
+		for(Member m : memberList) {
+			memberRepository.save(m);
+		}
+	}
 	
 	@Test
 	public void JpaJooqTest() {
@@ -57,7 +95,12 @@ class PracticeJooqApplicationTests {
 		}
 		
 		// then
-		Assertions.assertEquals(jooqResult.size(), 1);
+		Assertions.assertEquals(jooqResult.size(), 4);
+		
+	}
+	
+	@Test
+	public void StatsQueryTest() {
 		
 	}
 }
