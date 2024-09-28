@@ -5,7 +5,11 @@ package com.practice.practice_jooq.generated;
 
 
 import com.practice.practice_jooq.generated.tables.Member;
+import com.practice.practice_jooq.generated.tables.Product;
+import com.practice.practice_jooq.generated.tables.Purchase;
 import com.practice.practice_jooq.generated.tables.records.MemberRecord;
+import com.practice.practice_jooq.generated.tables.records.ProductRecord;
+import com.practice.practice_jooq.generated.tables.records.PurchaseRecord;
 
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
@@ -25,4 +29,6 @@ public class Keys {
     // -------------------------------------------------------------------------
 
     public static final UniqueKey<MemberRecord> KEY_MEMBER_PRIMARY = Internal.createUniqueKey(Member.MEMBER, DSL.name("KEY_member_PRIMARY"), new TableField[] { Member.MEMBER.ID }, true);
+    public static final UniqueKey<ProductRecord> KEY_PRODUCT_PRIMARY = Internal.createUniqueKey(Product.PRODUCT, DSL.name("KEY_product_PRIMARY"), new TableField[] { Product.PRODUCT.ID }, true);
+    public static final UniqueKey<PurchaseRecord> KEY_PURCHASE_PRIMARY = Internal.createUniqueKey(Purchase.PURCHASE, DSL.name("KEY_purchase_PRIMARY"), new TableField[] { Purchase.PURCHASE.ID }, true);
 }

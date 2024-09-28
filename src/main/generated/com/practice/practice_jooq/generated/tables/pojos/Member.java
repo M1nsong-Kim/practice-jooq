@@ -4,7 +4,11 @@
 package com.practice.practice_jooq.generated.tables.pojos;
 
 
+import com.practice.practice_jooq.generated.enums.MemberGrade;
+import com.practice.practice_jooq.generated.enums.MemberRole;
+
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 
 /**
@@ -15,28 +19,58 @@ public class Member implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    private final LocalDateTime registerDtm;
+    private final LocalDateTime updaterDtm;
     private final String id;
-    private final String password;
-    private final String name;
     private final String idNumber;
+    private final String name;
+    private final String password;
+    private final MemberGrade grade;
+    private final MemberRole role;
 
     public Member(Member value) {
+        this.registerDtm = value.registerDtm;
+        this.updaterDtm = value.updaterDtm;
         this.id = value.id;
-        this.password = value.password;
-        this.name = value.name;
         this.idNumber = value.idNumber;
+        this.name = value.name;
+        this.password = value.password;
+        this.grade = value.grade;
+        this.role = value.role;
     }
 
     public Member(
+        LocalDateTime registerDtm,
+        LocalDateTime updaterDtm,
         String id,
-        String password,
+        String idNumber,
         String name,
-        String idNumber
+        String password,
+        MemberGrade grade,
+        MemberRole role
     ) {
+        this.registerDtm = registerDtm;
+        this.updaterDtm = updaterDtm;
         this.id = id;
-        this.password = password;
-        this.name = name;
         this.idNumber = idNumber;
+        this.name = name;
+        this.password = password;
+        this.grade = grade;
+        this.role = role;
+    }
+
+    /**
+     * Getter for <code>jooq.member.register_dtm</code>.
+     */
+    public LocalDateTime getRegisterDtm() {
+        return this.registerDtm;
+    }
+
+    /**
+     * Getter for <code>jooq.member.updater_dtm</code>.
+     */
+    public LocalDateTime getUpdaterDtm() {
+        return this.updaterDtm;
     }
 
     /**
@@ -47,10 +81,10 @@ public class Member implements Serializable {
     }
 
     /**
-     * Getter for <code>jooq.member.password</code>.
+     * Getter for <code>jooq.member.id_number</code>.
      */
-    public String getPassword() {
-        return this.password;
+    public String getIdNumber() {
+        return this.idNumber;
     }
 
     /**
@@ -61,10 +95,24 @@ public class Member implements Serializable {
     }
 
     /**
-     * Getter for <code>jooq.member.id_number</code>.
+     * Getter for <code>jooq.member.password</code>.
      */
-    public String getIdNumber() {
-        return this.idNumber;
+    public String getPassword() {
+        return this.password;
+    }
+
+    /**
+     * Getter for <code>jooq.member.grade</code>.
+     */
+    public MemberGrade getGrade() {
+        return this.grade;
+    }
+
+    /**
+     * Getter for <code>jooq.member.role</code>.
+     */
+    public MemberRole getRole() {
+        return this.role;
     }
 
     @Override
@@ -76,17 +124,29 @@ public class Member implements Serializable {
         if (getClass() != obj.getClass())
             return false;
         final Member other = (Member) obj;
+        if (this.registerDtm == null) {
+            if (other.registerDtm != null)
+                return false;
+        }
+        else if (!this.registerDtm.equals(other.registerDtm))
+            return false;
+        if (this.updaterDtm == null) {
+            if (other.updaterDtm != null)
+                return false;
+        }
+        else if (!this.updaterDtm.equals(other.updaterDtm))
+            return false;
         if (this.id == null) {
             if (other.id != null)
                 return false;
         }
         else if (!this.id.equals(other.id))
             return false;
-        if (this.password == null) {
-            if (other.password != null)
+        if (this.idNumber == null) {
+            if (other.idNumber != null)
                 return false;
         }
-        else if (!this.password.equals(other.password))
+        else if (!this.idNumber.equals(other.idNumber))
             return false;
         if (this.name == null) {
             if (other.name != null)
@@ -94,11 +154,23 @@ public class Member implements Serializable {
         }
         else if (!this.name.equals(other.name))
             return false;
-        if (this.idNumber == null) {
-            if (other.idNumber != null)
+        if (this.password == null) {
+            if (other.password != null)
                 return false;
         }
-        else if (!this.idNumber.equals(other.idNumber))
+        else if (!this.password.equals(other.password))
+            return false;
+        if (this.grade == null) {
+            if (other.grade != null)
+                return false;
+        }
+        else if (!this.grade.equals(other.grade))
+            return false;
+        if (this.role == null) {
+            if (other.role != null)
+                return false;
+        }
+        else if (!this.role.equals(other.role))
             return false;
         return true;
     }
@@ -107,10 +179,14 @@ public class Member implements Serializable {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
+        result = prime * result + ((this.registerDtm == null) ? 0 : this.registerDtm.hashCode());
+        result = prime * result + ((this.updaterDtm == null) ? 0 : this.updaterDtm.hashCode());
         result = prime * result + ((this.id == null) ? 0 : this.id.hashCode());
-        result = prime * result + ((this.password == null) ? 0 : this.password.hashCode());
-        result = prime * result + ((this.name == null) ? 0 : this.name.hashCode());
         result = prime * result + ((this.idNumber == null) ? 0 : this.idNumber.hashCode());
+        result = prime * result + ((this.name == null) ? 0 : this.name.hashCode());
+        result = prime * result + ((this.password == null) ? 0 : this.password.hashCode());
+        result = prime * result + ((this.grade == null) ? 0 : this.grade.hashCode());
+        result = prime * result + ((this.role == null) ? 0 : this.role.hashCode());
         return result;
     }
 
@@ -118,10 +194,14 @@ public class Member implements Serializable {
     public String toString() {
         StringBuilder sb = new StringBuilder("Member (");
 
-        sb.append(id);
-        sb.append(", ").append(password);
-        sb.append(", ").append(name);
+        sb.append(registerDtm);
+        sb.append(", ").append(updaterDtm);
+        sb.append(", ").append(id);
         sb.append(", ").append(idNumber);
+        sb.append(", ").append(name);
+        sb.append(", ").append(password);
+        sb.append(", ").append(grade);
+        sb.append(", ").append(role);
 
         sb.append(")");
         return sb.toString();

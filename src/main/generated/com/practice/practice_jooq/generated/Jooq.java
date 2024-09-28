@@ -5,11 +5,14 @@ package com.practice.practice_jooq.generated;
 
 
 import com.practice.practice_jooq.generated.tables.Member;
+import com.practice.practice_jooq.generated.tables.Product;
+import com.practice.practice_jooq.generated.tables.Purchase;
 
 import java.util.Arrays;
 import java.util.List;
 
 import org.jooq.Catalog;
+import org.jooq.Sequence;
 import org.jooq.Table;
 import org.jooq.impl.SchemaImpl;
 
@@ -33,6 +36,16 @@ public class Jooq extends SchemaImpl {
     public final Member MEMBER = Member.MEMBER;
 
     /**
+     * The table <code>jooq.product</code>.
+     */
+    public final Product PRODUCT = Product.PRODUCT;
+
+    /**
+     * The table <code>jooq.purchase</code>.
+     */
+    public final Purchase PURCHASE = Purchase.PURCHASE;
+
+    /**
      * No further instances allowed
      */
     private Jooq() {
@@ -46,9 +59,19 @@ public class Jooq extends SchemaImpl {
     }
 
     @Override
+    public final List<Sequence<?>> getSequences() {
+        return Arrays.asList(
+            Sequences.ORDER_SEQ,
+            Sequences.PURCHASE_SEQ
+        );
+    }
+
+    @Override
     public final List<Table<?>> getTables() {
         return Arrays.asList(
-            Member.MEMBER
+            Member.MEMBER,
+            Product.PRODUCT,
+            Purchase.PURCHASE
         );
     }
 }

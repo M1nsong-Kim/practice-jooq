@@ -5,6 +5,8 @@ package com.practice.practice_jooq.generated;
 
 
 import com.practice.practice_jooq.generated.tables.Member;
+import com.practice.practice_jooq.generated.tables.Product;
+import com.practice.practice_jooq.generated.tables.Purchase;
 
 
 /**
@@ -17,4 +19,14 @@ public class Tables {
      * The table <code>jooq.member</code>.
      */
     public static final Member MEMBER = Member.MEMBER;
+
+    /**
+     * The table <code>jooq.product</code>.
+     */
+    public static final Product PRODUCT = Product.PRODUCT;
+
+    /**
+     * The table <code>jooq.purchase</code>.
+     */
+    public static final Purchase PURCHASE = Purchase.PURCHASE;
 }

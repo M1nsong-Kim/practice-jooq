@@ -6,17 +6,20 @@ package com.practice.practice_jooq.generated.tables;
 
 import com.practice.practice_jooq.generated.Jooq;
 import com.practice.practice_jooq.generated.Keys;
+import com.practice.practice_jooq.generated.enums.MemberGrade;
+import com.practice.practice_jooq.generated.enums.MemberRole;
 import com.practice.practice_jooq.generated.tables.records.MemberRecord;
 
+import java.time.LocalDateTime;
 import java.util.function.Function;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
-import org.jooq.Function4;
+import org.jooq.Function8;
 import org.jooq.Name;
 import org.jooq.Record;
 import org.jooq.Records;
-import org.jooq.Row4;
+import org.jooq.Row8;
 import org.jooq.Schema;
 import org.jooq.SelectField;
 import org.jooq.Table;
@@ -50,24 +53,44 @@ public class Member extends TableImpl<MemberRecord> {
     }
 
     /**
+     * The column <code>jooq.member.register_dtm</code>.
+     */
+    public final TableField<MemberRecord, LocalDateTime> REGISTER_DTM = createField(DSL.name("register_dtm"), SQLDataType.LOCALDATETIME(6).defaultValue(DSL.field(DSL.raw("NULL"), SQLDataType.LOCALDATETIME)), this, "");
+
+    /**
+     * The column <code>jooq.member.updater_dtm</code>.
+     */
+    public final TableField<MemberRecord, LocalDateTime> UPDATER_DTM = createField(DSL.name("updater_dtm"), SQLDataType.LOCALDATETIME(6).defaultValue(DSL.field(DSL.raw("NULL"), SQLDataType.LOCALDATETIME)), this, "");
+
+    /**
      * The column <code>jooq.member.id</code>.
      */
-    public final TableField<MemberRecord, String> ID = createField(DSL.name("id"), SQLDataType.VARCHAR(50).nullable(false), this, "");
-
-    /**
-     * The column <code>jooq.member.password</code>.
-     */
-    public final TableField<MemberRecord, String> PASSWORD = createField(DSL.name("password"), SQLDataType.VARCHAR(50).nullable(false), this, "");
-
-    /**
-     * The column <code>jooq.member.name</code>.
-     */
-    public final TableField<MemberRecord, String> NAME = createField(DSL.name("name"), SQLDataType.VARCHAR(50).nullable(false), this, "");
+    public final TableField<MemberRecord, String> ID = createField(DSL.name("id"), SQLDataType.VARCHAR(255).nullable(false), this, "");
 
     /**
      * The column <code>jooq.member.id_number</code>.
      */
-    public final TableField<MemberRecord, String> ID_NUMBER = createField(DSL.name("id_number"), SQLDataType.VARCHAR(50).nullable(false), this, "");
+    public final TableField<MemberRecord, String> ID_NUMBER = createField(DSL.name("id_number"), SQLDataType.VARCHAR(255).defaultValue(DSL.field(DSL.raw("NULL"), SQLDataType.VARCHAR)), this, "");
+
+    /**
+     * The column <code>jooq.member.name</code>.
+     */
+    public final TableField<MemberRecord, String> NAME = createField(DSL.name("name"), SQLDataType.VARCHAR(255).defaultValue(DSL.field(DSL.raw("NULL"), SQLDataType.VARCHAR)), this, "");
+
+    /**
+     * The column <code>jooq.member.password</code>.
+     */
+    public final TableField<MemberRecord, String> PASSWORD = createField(DSL.name("password"), SQLDataType.VARCHAR(255).defaultValue(DSL.field(DSL.raw("NULL"), SQLDataType.VARCHAR)), this, "");
+
+    /**
+     * The column <code>jooq.member.grade</code>.
+     */
+    public final TableField<MemberRecord, MemberGrade> GRADE = createField(DSL.name("grade"), SQLDataType.VARCHAR(6).defaultValue(DSL.field(DSL.raw("NULL"), SQLDataType.VARCHAR)).asEnumDataType(com.practice.practice_jooq.generated.enums.MemberGrade.class), this, "");
+
+    /**
+     * The column <code>jooq.member.role</code>.
+     */
+    public final TableField<MemberRecord, MemberRole> ROLE = createField(DSL.name("role"), SQLDataType.VARCHAR(5).defaultValue(DSL.field(DSL.raw("NULL"), SQLDataType.VARCHAR)).asEnumDataType(com.practice.practice_jooq.generated.enums.MemberRole.class), this, "");
 
     private Member(Name alias, Table<MemberRecord> aliased) {
         this(alias, aliased, null);
@@ -152,18 +175,18 @@ public class Member extends TableImpl<MemberRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row4 type methods
+    // Row8 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row4<String, String, String, String> fieldsRow() {
-        return (Row4) super.fieldsRow();
+    public Row8<LocalDateTime, LocalDateTime, String, String, String, String, MemberGrade, MemberRole> fieldsRow() {
+        return (Row8) super.fieldsRow();
     }
 
     /**
      * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
      */
-    public <U> SelectField<U> mapping(Function4<? super String, ? super String, ? super String, ? super String, ? extends U> from) {
+    public <U> SelectField<U> mapping(Function8<? super LocalDateTime, ? super LocalDateTime, ? super String, ? super String, ? super String, ? super String, ? super MemberGrade, ? super MemberRole, ? extends U> from) {
         return convertFrom(Records.mapping(from));
     }
 
@@ -171,7 +194,7 @@ public class Member extends TableImpl<MemberRecord> {
      * Convenience mapping calling {@link SelectField#convertFrom(Class,
      * Function)}.
      */
-    public <U> SelectField<U> mapping(Class<U> toType, Function4<? super String, ? super String, ? super String, ? super String, ? extends U> from) {
+    public <U> SelectField<U> mapping(Class<U> toType, Function8<? super LocalDateTime, ? super LocalDateTime, ? super String, ? super String, ? super String, ? super String, ? super MemberGrade, ? super MemberRole, ? extends U> from) {
         return convertFrom(toType, Records.mapping(from));
     }
 }
