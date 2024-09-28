@@ -7,6 +7,7 @@ package com.practice.practice_jooq.generated;
 import com.practice.practice_jooq.generated.tables.Member;
 import com.practice.practice_jooq.generated.tables.Product;
 import com.practice.practice_jooq.generated.tables.Purchase;
+import com.practice.practice_jooq.generated.tables.StatsSalesByCategory;
 
 
 /**
@@ -29,4 +30,9 @@ public class Tables {
      * The table <code>jooq.purchase</code>.
      */
     public static final Purchase PURCHASE = Purchase.PURCHASE;
+
+    /**
+     * VIEW
+     */
+    public static final StatsSalesByCategory STATS_SALES_BY_CATEGORY = StatsSalesByCategory.STATS_SALES_BY_CATEGORY;
 }
