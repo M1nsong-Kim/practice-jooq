@@ -29,7 +29,10 @@ public class Purchase extends BaseEntity {
 	private Integer id;
 	
 	@Column(name="purchase_id")
-	private Integer purchaseId;
+	private Integer purchaseId;		// 주문 1개당 구매번호 1개
+	
+	@Column(name="member_id")
+	private String memberId;
 	
 	@Column(name="product_id")
 	private String productId;
