@@ -9,11 +9,17 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.practice.practice_jooq.categories.Category;
 import com.practice.practice_jooq.categories.Grade;
 import com.practice.practice_jooq.categories.Role;
+import com.practice.practice_jooq.categories.Status;
 import com.practice.practice_jooq.member.Member;
 import com.practice.practice_jooq.member.MemberDto;
 import com.practice.practice_jooq.member.MemberRepository;
+import com.practice.practice_jooq.product.Product;
+import com.practice.practice_jooq.product.ProductRepository;
+import com.practice.practice_jooq.purchase.Purchase;
+import com.practice.practice_jooq.purchase.PurchaseRepository;
 
 @SpringBootTest
 class PracticeJooqApplicationTests {
@@ -27,8 +33,9 @@ class PracticeJooqApplicationTests {
 	 */
 	// 테스트 코드에 아무것도 없을 때 @SpringBootTest 어노테이션을 없애면 된다
 	
-	@Autowired
-	MemberRepository memberRepository;
+	@Autowired MemberRepository memberRepository;
+	@Autowired ProductRepository productRepository;
+	@Autowired PurchaseRepository purchaseRepository;
 	
 	@BeforeEach
 	public void 회원주입() {
@@ -101,7 +108,47 @@ class PracticeJooqApplicationTests {
 	
 	@Test
 	public void StatsQueryTest() {
+		// when
+		Product product1 = Product.builder()
+								.id("S01")
+								.category(Category.SKIRTS)
+								.name("치마1")
+								.price(35000)
+								.build();
 		
+		Product product2 = Product.builder()
+								.id("S02")
+								.category(Category.SKIRTS)
+								.name("치마2")
+								.price(40000)
+								.build();
+		productRepository.save(product1);
+		productRepository.save(product2);
+		
+		Purchase purchase1 = Purchase.builder()
+								.purchaseId(1)
+								.memberId("id111")
+								.productId("S01")
+								.count(1)
+								.status(Status.Completed)
+								.build();
+		
+		Purchase purchase2 = Purchase.builder()
+								.purchaseId(1)
+								.memberId("id222")
+								.productId("S01")
+								.count(3)
+								.status(Status.Completed)
+								.build();
+		
+		Purchase purchase3 = Purchase.builder()
+								.purchaseId(1)
+								.memberId("id111")
+								.productId("S01")
+								.count(1)
+								.status(Status.Completed)
+								.build();
+				
 	}
 }
 

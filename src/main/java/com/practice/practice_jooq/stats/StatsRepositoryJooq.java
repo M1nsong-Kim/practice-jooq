@@ -1,7 +1,9 @@
 package com.practice.practice_jooq.stats;
 
-import java.util.List;
+import org.jooq.Record;
+import org.jooq.Result;
 
 public interface StatsRepositoryJooq {
-	List<StatsSalesByCategory> selectStatsSalesByCategory();
+//	List<StatsSalesByCategory> selectStatsSalesByCategory();
+	Result<Record> selectStatsSalesByCategory();
 }
