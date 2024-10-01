@@ -12,6 +12,7 @@ import static org.jooq.impl.DSL.*;			// rollup 등
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.List;
 
 import org.jooq.DSLContext;
 import org.jooq.Record;
@@ -30,19 +31,18 @@ public class StatsRepositoryJooqImpl implements StatsRepositoryJooq{
 	}
 
 	@Override
-	public Result<Record> selectStatsSalesByCategory() {
-			Result<Record> result = dsl.select(
+	public List<StatsDto> selectStatsSalesByCategory() {
+			return dsl.select(
 						date(PURCHASE.REGISTER_DTM.toString())
 						, PRODUCT.CATEGORY
 						, sum(PURCHASE.COUNT)
 					)
 					.from(PURCHASE)
 					.join(PRODUCT)
-					.on(PURCHASE.PRODUCT_ID.eq(PRODUCT.ID))
+						.on(PURCHASE.PRODUCT_ID.eq(PRODUCT.ID))
 					.where(PURCHASE.STATUS.eq(PurchaseStatus.Completed))
-					.groupBy(rollup(PURCHASE.REGISTER_DTM, PRODUCT.CATEGORY))
-					.fetch();
-			return result;
+					.groupBy(rollup(date(PURCHASE.REGISTER_DTM.toString()), PRODUCT.CATEGORY))
+					.fetchInto(StatsDto.class);
 	}
 	
 }

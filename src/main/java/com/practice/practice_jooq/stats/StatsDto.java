@@ -1,5 +1,7 @@
 package com.practice.practice_jooq.stats;
 
+import java.time.LocalDate;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,7 +12,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor // 모든 필드를 포함하는 생성자를 생성
 @Builder // 빌더 패턴을 생성	
 public class StatsDto {
+	private LocalDate date;
 	private String kind;
-	private String standard;
-	private String count;
+//	private String standard;
+	private Integer count;
 }

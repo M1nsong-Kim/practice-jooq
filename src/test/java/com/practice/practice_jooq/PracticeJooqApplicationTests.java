@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,6 +21,8 @@ import com.practice.practice_jooq.product.Product;
 import com.practice.practice_jooq.product.ProductRepository;
 import com.practice.practice_jooq.purchase.Purchase;
 import com.practice.practice_jooq.purchase.PurchaseRepository;
+import com.practice.practice_jooq.stats.StatsDto;
+import com.practice.practice_jooq.stats.StatsRepository;
 
 @SpringBootTest
 class PracticeJooqApplicationTests {
@@ -36,6 +39,7 @@ class PracticeJooqApplicationTests {
 	@Autowired MemberRepository memberRepository;
 	@Autowired ProductRepository productRepository;
 	@Autowired PurchaseRepository purchaseRepository;
+	@Autowired StatsRepository statsRepository;
 	
 	@BeforeEach
 	public void 회원주입() {
@@ -76,7 +80,7 @@ class PracticeJooqApplicationTests {
 		}
 	}
 	
-	@Test
+	@Test @Disabled
 	public void JpaJooqTest() {
 		// given
 //		Member member1 = new Member("id1", "pwd1", "user1", "971009");
@@ -108,7 +112,7 @@ class PracticeJooqApplicationTests {
 	
 	@Test
 	public void StatsQueryTest() {
-		// when
+		// given
 		Product product1 = Product.builder()
 								.id("S01")
 								.category(Category.SKIRTS)
@@ -122,8 +126,17 @@ class PracticeJooqApplicationTests {
 								.name("치마2")
 								.price(40000)
 								.build();
+		
+		Product product3 = Product.builder()
+						.id("P02")
+						.category(Category.PANTS)
+						.name("바지1")
+						.price(40000)
+						.build();
+		
 		productRepository.save(product1);
 		productRepository.save(product2);
+		productRepository.save(product3);
 		
 		Purchase purchase1 = Purchase.builder()
 								.purchaseId(1)
@@ -144,11 +157,19 @@ class PracticeJooqApplicationTests {
 		Purchase purchase3 = Purchase.builder()
 								.purchaseId(1)
 								.memberId("id111")
-								.productId("S01")
+								.productId("P01")
 								.count(1)
 								.status(Status.Completed)
 								.build();
-				
+		purchaseRepository.save(purchase1);
+		purchaseRepository.save(purchase2);
+		purchaseRepository.save(purchase3);
+		
+		// when
+		List<StatsDto> result = statsRepository.selectStatsSalesByCategory();
+			
+		// then
+		System.out.println("********************* " + result);
 	}
 }
 

@@ -13,7 +13,7 @@ spring:
     
   jpa:
     hibernate:
-      ddl-auto: create # 생성했으니 주석 / 개발 중에는 계속 켜두기 / 애플리케이션 시작 시 테이블을 자동으로 생성하지만, 이는 jOOQ 코드 생성 시점과는 무관 -> 테이블 미리 만들어두거나  generateJooq.dependsOn bootRun 등으로 의존성 연결해야 함
+      # ddl-auto: create # 생성했으니 주석 / 개발 중에는 계속 켜두기 / 애플리케이션 시작 시 테이블을 자동으로 생성하지만, 이는 jOOQ 코드 생성 시점과는 무관 -> 테이블 미리 만들어두거나  generateJooq.dependsOn bootRun 등으로 의존성 연결해야 함
       show_sql: true	# QueryDSL에서 빌더 역할을 하는 JPQL 로그 보기
     properties:
       hibernate:
