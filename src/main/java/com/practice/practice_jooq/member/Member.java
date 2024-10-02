@@ -33,6 +33,8 @@ public class Member extends BaseTimeEntity {
 	
 	private String name;
 	
+	private Integer gender;
+	
 	@Column(name = "id_number")
 	private String idNumber;	// 주민번호 앞자리. 추후 나이 계산
 	
