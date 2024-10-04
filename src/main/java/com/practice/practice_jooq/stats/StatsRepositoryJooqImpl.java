@@ -7,10 +7,9 @@ import static com.practice.practice_jooq.generated.tables.Product.PRODUCT;
 // view 생성 후 J 클래스 정상 생성
 
 import static com.practice.practice_jooq.generated.tables.Purchase.PURCHASE;
+
 // rollup 등
-import static org.jooq.impl.DSL.date;
-import static org.jooq.impl.DSL.rollup;
-import static org.jooq.impl.DSL.sum;
+import static org.jooq.impl.DSL.*;
 
 import java.util.List;
 
@@ -45,7 +44,7 @@ public class StatsRepositoryJooqImpl implements StatsRepositoryJooq{
 	public List<StatsDto> selectStatsSalesByGender() {
 		return dsl.select(
 				date(PURCHASE.REGISTER_DTM.toString())
-				, MEMBER.GENDER
+				, if_(MEMBER.GENDER.eq(1), "남자", if_(MEMBER.GENDER.eq(2), "여자", "소계/합계"))
 				, sum(PURCHASE.COUNT)
 			)
 			.from(PURCHASE)

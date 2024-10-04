@@ -4,10 +4,13 @@
 package com.practice.practice_jooq.generated;
 
 
+import com.practice.practice_jooq.generated.tables.Color;
 import com.practice.practice_jooq.generated.tables.Member;
 import com.practice.practice_jooq.generated.tables.Product;
 import com.practice.practice_jooq.generated.tables.Purchase;
+import com.practice.practice_jooq.generated.tables.Size;
 import com.practice.practice_jooq.generated.tables.StatsSalesByCategory;
+import com.practice.practice_jooq.generated.tables.StatsSalesByGender;
 
 import java.util.Arrays;
 import java.util.List;
@@ -32,6 +35,11 @@ public class Jooq extends SchemaImpl {
     public static final Jooq JOOQ = new Jooq();
 
     /**
+     * The table <code>jooq.color</code>.
+     */
+    public final Color COLOR = Color.COLOR;
+
+    /**
      * The table <code>jooq.member</code>.
      */
     public final Member MEMBER = Member.MEMBER;
@@ -47,9 +55,19 @@ public class Jooq extends SchemaImpl {
     public final Purchase PURCHASE = Purchase.PURCHASE;
 
     /**
-     * VIEW
+     * The table <code>jooq.size</code>.
+     */
+    public final Size SIZE = Size.SIZE;
+
+    /**
+     * The table <code>jooq.stats_sales_by_category</code>.
      */
     public final StatsSalesByCategory STATS_SALES_BY_CATEGORY = StatsSalesByCategory.STATS_SALES_BY_CATEGORY;
+
+    /**
+     * The table <code>jooq.stats_sales_by_gender</code>.
+     */
+    public final StatsSalesByGender STATS_SALES_BY_GENDER = StatsSalesByGender.STATS_SALES_BY_GENDER;
 
     /**
      * No further instances allowed
@@ -67,18 +85,25 @@ public class Jooq extends SchemaImpl {
     @Override
     public final List<Sequence<?>> getSequences() {
         return Arrays.asList(
+            Sequences.COLOR_SEQ,
             Sequences.ORDER_SEQ,
-            Sequences.PURCHASE_SEQ
+            Sequences.PURCHASE_SEQ,
+            Sequences.SIZE_SEQ,
+            Sequences.STATS_SALES_BY_CATEGORY_SEQ,
+            Sequences.STATS_SALES_BY_GENDER_SEQ
         );
     }
 
     @Override
     public final List<Table<?>> getTables() {
         return Arrays.asList(
+            Color.COLOR,
             Member.MEMBER,
             Product.PRODUCT,
             Purchase.PURCHASE,
-            StatsSalesByCategory.STATS_SALES_BY_CATEGORY
+            Size.SIZE,
+            StatsSalesByCategory.STATS_SALES_BY_CATEGORY,
+            StatsSalesByGender.STATS_SALES_BY_GENDER
         );
     }
 }

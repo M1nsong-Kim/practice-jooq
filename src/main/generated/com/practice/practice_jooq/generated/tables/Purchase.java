@@ -14,11 +14,11 @@ import java.util.function.Function;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
-import org.jooq.Function9;
+import org.jooq.Function10;
 import org.jooq.Name;
 import org.jooq.Record;
 import org.jooq.Records;
-import org.jooq.Row9;
+import org.jooq.Row10;
 import org.jooq.Schema;
 import org.jooq.SelectField;
 import org.jooq.Table;
@@ -75,6 +75,11 @@ public class Purchase extends TableImpl<PurchaseRecord> {
      * The column <code>jooq.purchase.updater_dtm</code>.
      */
     public final TableField<PurchaseRecord, LocalDateTime> UPDATER_DTM = createField(DSL.name("updater_dtm"), SQLDataType.LOCALDATETIME(6).defaultValue(DSL.field(DSL.raw("NULL"), SQLDataType.LOCALDATETIME)), this, "");
+
+    /**
+     * The column <code>jooq.purchase.member_id</code>.
+     */
+    public final TableField<PurchaseRecord, String> MEMBER_ID = createField(DSL.name("member_id"), SQLDataType.VARCHAR(255).defaultValue(DSL.field(DSL.raw("NULL"), SQLDataType.VARCHAR)), this, "");
 
     /**
      * The column <code>jooq.purchase.product_id</code>.
@@ -179,18 +184,18 @@ public class Purchase extends TableImpl<PurchaseRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row9 type methods
+    // Row10 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row9<Integer, Integer, Integer, LocalDateTime, LocalDateTime, String, String, String, PurchaseStatus> fieldsRow() {
-        return (Row9) super.fieldsRow();
+    public Row10<Integer, Integer, Integer, LocalDateTime, LocalDateTime, String, String, String, String, PurchaseStatus> fieldsRow() {
+        return (Row10) super.fieldsRow();
     }
 
     /**
      * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
      */
-    public <U> SelectField<U> mapping(Function9<? super Integer, ? super Integer, ? super Integer, ? super LocalDateTime, ? super LocalDateTime, ? super String, ? super String, ? super String, ? super PurchaseStatus, ? extends U> from) {
+    public <U> SelectField<U> mapping(Function10<? super Integer, ? super Integer, ? super Integer, ? super LocalDateTime, ? super LocalDateTime, ? super String, ? super String, ? super String, ? super String, ? super PurchaseStatus, ? extends U> from) {
         return convertFrom(Records.mapping(from));
     }
 
@@ -198,7 +203,7 @@ public class Purchase extends TableImpl<PurchaseRecord> {
      * Convenience mapping calling {@link SelectField#convertFrom(Class,
      * Function)}.
      */
-    public <U> SelectField<U> mapping(Class<U> toType, Function9<? super Integer, ? super Integer, ? super Integer, ? super LocalDateTime, ? super LocalDateTime, ? super String, ? super String, ? super String, ? super PurchaseStatus, ? extends U> from) {
+    public <U> SelectField<U> mapping(Class<U> toType, Function10<? super Integer, ? super Integer, ? super Integer, ? super LocalDateTime, ? super LocalDateTime, ? super String, ? super String, ? super String, ? super String, ? super PurchaseStatus, ? extends U> from) {
         return convertFrom(toType, Records.mapping(from));
     }
 }

@@ -15,11 +15,11 @@ import java.util.function.Function;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
-import org.jooq.Function8;
+import org.jooq.Function9;
 import org.jooq.Name;
 import org.jooq.Record;
 import org.jooq.Records;
-import org.jooq.Row8;
+import org.jooq.Row9;
 import org.jooq.Schema;
 import org.jooq.SelectField;
 import org.jooq.Table;
@@ -51,6 +51,11 @@ public class Member extends TableImpl<MemberRecord> {
     public Class<MemberRecord> getRecordType() {
         return MemberRecord.class;
     }
+
+    /**
+     * The column <code>jooq.member.gender</code>.
+     */
+    public final TableField<MemberRecord, Integer> GENDER = createField(DSL.name("gender"), SQLDataType.INTEGER.defaultValue(DSL.field(DSL.raw("NULL"), SQLDataType.INTEGER)), this, "");
 
     /**
      * The column <code>jooq.member.register_dtm</code>.
@@ -175,18 +180,18 @@ public class Member extends TableImpl<MemberRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row8 type methods
+    // Row9 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row8<LocalDateTime, LocalDateTime, String, String, String, String, MemberGrade, MemberRole> fieldsRow() {
-        return (Row8) super.fieldsRow();
+    public Row9<Integer, LocalDateTime, LocalDateTime, String, String, String, String, MemberGrade, MemberRole> fieldsRow() {
+        return (Row9) super.fieldsRow();
     }
 
     /**
      * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
      */
-    public <U> SelectField<U> mapping(Function8<? super LocalDateTime, ? super LocalDateTime, ? super String, ? super String, ? super String, ? super String, ? super MemberGrade, ? super MemberRole, ? extends U> from) {
+    public <U> SelectField<U> mapping(Function9<? super Integer, ? super LocalDateTime, ? super LocalDateTime, ? super String, ? super String, ? super String, ? super String, ? super MemberGrade, ? super MemberRole, ? extends U> from) {
         return convertFrom(Records.mapping(from));
     }
 
@@ -194,7 +199,7 @@ public class Member extends TableImpl<MemberRecord> {
      * Convenience mapping calling {@link SelectField#convertFrom(Class,
      * Function)}.
      */
-    public <U> SelectField<U> mapping(Class<U> toType, Function8<? super LocalDateTime, ? super LocalDateTime, ? super String, ? super String, ? super String, ? super String, ? super MemberGrade, ? super MemberRole, ? extends U> from) {
+    public <U> SelectField<U> mapping(Class<U> toType, Function9<? super Integer, ? super LocalDateTime, ? super LocalDateTime, ? super String, ? super String, ? super String, ? super String, ? super MemberGrade, ? super MemberRole, ? extends U> from) {
         return convertFrom(toType, Records.mapping(from));
     }
 }

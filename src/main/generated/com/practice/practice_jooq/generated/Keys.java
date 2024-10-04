@@ -4,12 +4,20 @@
 package com.practice.practice_jooq.generated;
 
 
+import com.practice.practice_jooq.generated.tables.Color;
 import com.practice.practice_jooq.generated.tables.Member;
 import com.practice.practice_jooq.generated.tables.Product;
 import com.practice.practice_jooq.generated.tables.Purchase;
+import com.practice.practice_jooq.generated.tables.Size;
+import com.practice.practice_jooq.generated.tables.StatsSalesByCategory;
+import com.practice.practice_jooq.generated.tables.StatsSalesByGender;
+import com.practice.practice_jooq.generated.tables.records.ColorRecord;
 import com.practice.practice_jooq.generated.tables.records.MemberRecord;
 import com.practice.practice_jooq.generated.tables.records.ProductRecord;
 import com.practice.practice_jooq.generated.tables.records.PurchaseRecord;
+import com.practice.practice_jooq.generated.tables.records.SizeRecord;
+import com.practice.practice_jooq.generated.tables.records.StatsSalesByCategoryRecord;
+import com.practice.practice_jooq.generated.tables.records.StatsSalesByGenderRecord;
 
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
@@ -28,7 +36,11 @@ public class Keys {
     // UNIQUE and PRIMARY KEY definitions
     // -------------------------------------------------------------------------
 
+    public static final UniqueKey<ColorRecord> KEY_COLOR_PRIMARY = Internal.createUniqueKey(Color.COLOR, DSL.name("KEY_color_PRIMARY"), new TableField[] { Color.COLOR.ID }, true);
     public static final UniqueKey<MemberRecord> KEY_MEMBER_PRIMARY = Internal.createUniqueKey(Member.MEMBER, DSL.name("KEY_member_PRIMARY"), new TableField[] { Member.MEMBER.ID }, true);
     public static final UniqueKey<ProductRecord> KEY_PRODUCT_PRIMARY = Internal.createUniqueKey(Product.PRODUCT, DSL.name("KEY_product_PRIMARY"), new TableField[] { Product.PRODUCT.ID }, true);
     public static final UniqueKey<PurchaseRecord> KEY_PURCHASE_PRIMARY = Internal.createUniqueKey(Purchase.PURCHASE, DSL.name("KEY_purchase_PRIMARY"), new TableField[] { Purchase.PURCHASE.ID }, true);
+    public static final UniqueKey<SizeRecord> KEY_SIZE_PRIMARY = Internal.createUniqueKey(Size.SIZE, DSL.name("KEY_size_PRIMARY"), new TableField[] { Size.SIZE.ID }, true);
+    public static final UniqueKey<StatsSalesByCategoryRecord> KEY_STATS_SALES_BY_CATEGORY_PRIMARY = Internal.createUniqueKey(StatsSalesByCategory.STATS_SALES_BY_CATEGORY, DSL.name("KEY_stats_sales_by_category_PRIMARY"), new TableField[] { StatsSalesByCategory.STATS_SALES_BY_CATEGORY.ID }, true);
+    public static final UniqueKey<StatsSalesByGenderRecord> KEY_STATS_SALES_BY_GENDER_PRIMARY = Internal.createUniqueKey(StatsSalesByGender.STATS_SALES_BY_GENDER, DSL.name("KEY_stats_sales_by_gender_PRIMARY"), new TableField[] { StatsSalesByGender.STATS_SALES_BY_GENDER.ID }, true);
 }

@@ -16,6 +16,11 @@ import org.jooq.impl.SQLDataType;
 public class Sequences {
 
     /**
+     * The sequence <code>jooq.color_seq</code>
+     */
+    public static final Sequence<Long> COLOR_SEQ = Internal.createSequence("color_seq", Jooq.JOOQ, SQLDataType.BIGINT, null, 50L, null, null, false, 0L);
+
+    /**
      * The sequence <code>jooq.order_seq</code>
      */
     public static final Sequence<Long> ORDER_SEQ = Internal.createSequence("order_seq", Jooq.JOOQ, SQLDataType.BIGINT, null, 50L, null, null, false, 0L);
@@ -24,4 +29,19 @@ public class Sequences {
      * The sequence <code>jooq.purchase_seq</code>
      */
     public static final Sequence<Long> PURCHASE_SEQ = Internal.createSequence("purchase_seq", Jooq.JOOQ, SQLDataType.BIGINT, null, 50L, null, null, false, 0L);
+
+    /**
+     * The sequence <code>jooq.size_seq</code>
+     */
+    public static final Sequence<Long> SIZE_SEQ = Internal.createSequence("size_seq", Jooq.JOOQ, SQLDataType.BIGINT, null, 50L, null, null, false, 0L);
+
+    /**
+     * The sequence <code>jooq.stats_sales_by_category_seq</code>
+     */
+    public static final Sequence<Long> STATS_SALES_BY_CATEGORY_SEQ = Internal.createSequence("stats_sales_by_category_seq", Jooq.JOOQ, SQLDataType.BIGINT, null, 50L, null, null, false, 0L);
+
+    /**
+     * The sequence <code>jooq.stats_sales_by_gender_seq</code>
+     */
+    public static final Sequence<Long> STATS_SALES_BY_GENDER_SEQ = Internal.createSequence("stats_sales_by_gender_seq", Jooq.JOOQ, SQLDataType.BIGINT, null, 50L, null, null, false, 0L);
 }

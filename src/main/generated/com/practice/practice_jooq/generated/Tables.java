@@ -4,10 +4,13 @@
 package com.practice.practice_jooq.generated;
 
 
+import com.practice.practice_jooq.generated.tables.Color;
 import com.practice.practice_jooq.generated.tables.Member;
 import com.practice.practice_jooq.generated.tables.Product;
 import com.practice.practice_jooq.generated.tables.Purchase;
+import com.practice.practice_jooq.generated.tables.Size;
 import com.practice.practice_jooq.generated.tables.StatsSalesByCategory;
+import com.practice.practice_jooq.generated.tables.StatsSalesByGender;
 
 
 /**
@@ -15,6 +18,11 @@ import com.practice.practice_jooq.generated.tables.StatsSalesByCategory;
  */
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Tables {
+
+    /**
+     * The table <code>jooq.color</code>.
+     */
+    public static final Color COLOR = Color.COLOR;
 
     /**
      * The table <code>jooq.member</code>.
@@ -32,7 +40,17 @@ public class Tables {
     public static final Purchase PURCHASE = Purchase.PURCHASE;
 
     /**
-     * VIEW
+     * The table <code>jooq.size</code>.
+     */
+    public static final Size SIZE = Size.SIZE;
+
+    /**
+     * The table <code>jooq.stats_sales_by_category</code>.
      */
     public static final StatsSalesByCategory STATS_SALES_BY_CATEGORY = StatsSalesByCategory.STATS_SALES_BY_CATEGORY;
+
+    /**
+     * The table <code>jooq.stats_sales_by_gender</code>.
+     */
+    public static final StatsSalesByGender STATS_SALES_BY_GENDER = StatsSalesByGender.STATS_SALES_BY_GENDER;
 }

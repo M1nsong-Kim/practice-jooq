@@ -150,7 +150,7 @@ class PracticeJooqApplicationTests {
 								.build();
 		
 		Purchase purchase2 = Purchase.builder()
-								.purchaseId(1)
+								.purchaseId(2)
 								.memberId("id222")
 								.productId("S01")
 								.count(3)
@@ -158,7 +158,7 @@ class PracticeJooqApplicationTests {
 								.build();
 		
 		Purchase purchase3 = Purchase.builder()
-								.purchaseId(1)
+								.purchaseId(3)
 								.memberId("id111")
 								.productId("P01")
 								.count(1)
@@ -169,10 +169,15 @@ class PracticeJooqApplicationTests {
 		purchaseRepository.save(purchase3);
 		
 		// when
-		List<StatsDto> result = statsRepository.selectStatsSalesByCategory();
+		List<StatsDto> categoryResult = statsRepository.selectStatsSalesByCategory();
+		List<StatsDto> genderResult = statsRepository.selectStatsSalesByGender();
 			
 		// then
-		System.out.println("********************* " + result);
+		System.out.println("********************* " + categoryResult);
+		System.out.println("********************* " + genderResult);
 	}
+	
+	// 순위
 }
+
 

@@ -23,6 +23,7 @@ public class Purchase implements Serializable {
     private final Integer purchaseId;
     private final LocalDateTime registerDtm;
     private final LocalDateTime updaterDtm;
+    private final String memberId;
     private final String productId;
     private final String register;
     private final String updater;
@@ -34,6 +35,7 @@ public class Purchase implements Serializable {
         this.purchaseId = value.purchaseId;
         this.registerDtm = value.registerDtm;
         this.updaterDtm = value.updaterDtm;
+        this.memberId = value.memberId;
         this.productId = value.productId;
         this.register = value.register;
         this.updater = value.updater;
@@ -46,6 +48,7 @@ public class Purchase implements Serializable {
         Integer purchaseId,
         LocalDateTime registerDtm,
         LocalDateTime updaterDtm,
+        String memberId,
         String productId,
         String register,
         String updater,
@@ -56,6 +59,7 @@ public class Purchase implements Serializable {
         this.purchaseId = purchaseId;
         this.registerDtm = registerDtm;
         this.updaterDtm = updaterDtm;
+        this.memberId = memberId;
         this.productId = productId;
         this.register = register;
         this.updater = updater;
@@ -95,6 +99,13 @@ public class Purchase implements Serializable {
      */
     public LocalDateTime getUpdaterDtm() {
         return this.updaterDtm;
+    }
+
+    /**
+     * Getter for <code>jooq.purchase.member_id</code>.
+     */
+    public String getMemberId() {
+        return this.memberId;
     }
 
     /**
@@ -164,6 +175,12 @@ public class Purchase implements Serializable {
         }
         else if (!this.updaterDtm.equals(other.updaterDtm))
             return false;
+        if (this.memberId == null) {
+            if (other.memberId != null)
+                return false;
+        }
+        else if (!this.memberId.equals(other.memberId))
+            return false;
         if (this.productId == null) {
             if (other.productId != null)
                 return false;
@@ -200,6 +217,7 @@ public class Purchase implements Serializable {
         result = prime * result + ((this.purchaseId == null) ? 0 : this.purchaseId.hashCode());
         result = prime * result + ((this.registerDtm == null) ? 0 : this.registerDtm.hashCode());
         result = prime * result + ((this.updaterDtm == null) ? 0 : this.updaterDtm.hashCode());
+        result = prime * result + ((this.memberId == null) ? 0 : this.memberId.hashCode());
         result = prime * result + ((this.productId == null) ? 0 : this.productId.hashCode());
         result = prime * result + ((this.register == null) ? 0 : this.register.hashCode());
         result = prime * result + ((this.updater == null) ? 0 : this.updater.hashCode());
@@ -216,6 +234,7 @@ public class Purchase implements Serializable {
         sb.append(", ").append(purchaseId);
         sb.append(", ").append(registerDtm);
         sb.append(", ").append(updaterDtm);
+        sb.append(", ").append(memberId);
         sb.append(", ").append(productId);
         sb.append(", ").append(register);
         sb.append(", ").append(updater);

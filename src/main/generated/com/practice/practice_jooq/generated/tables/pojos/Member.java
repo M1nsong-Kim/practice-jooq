@@ -19,6 +19,7 @@ public class Member implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    private final Integer gender;
     private final LocalDateTime registerDtm;
     private final LocalDateTime updaterDtm;
     private final String id;
@@ -29,6 +30,7 @@ public class Member implements Serializable {
     private final MemberRole role;
 
     public Member(Member value) {
+        this.gender = value.gender;
         this.registerDtm = value.registerDtm;
         this.updaterDtm = value.updaterDtm;
         this.id = value.id;
@@ -40,6 +42,7 @@ public class Member implements Serializable {
     }
 
     public Member(
+        Integer gender,
         LocalDateTime registerDtm,
         LocalDateTime updaterDtm,
         String id,
@@ -49,6 +52,7 @@ public class Member implements Serializable {
         MemberGrade grade,
         MemberRole role
     ) {
+        this.gender = gender;
         this.registerDtm = registerDtm;
         this.updaterDtm = updaterDtm;
         this.id = id;
@@ -57,6 +61,13 @@ public class Member implements Serializable {
         this.password = password;
         this.grade = grade;
         this.role = role;
+    }
+
+    /**
+     * Getter for <code>jooq.member.gender</code>.
+     */
+    public Integer getGender() {
+        return this.gender;
     }
 
     /**
@@ -124,6 +135,12 @@ public class Member implements Serializable {
         if (getClass() != obj.getClass())
             return false;
         final Member other = (Member) obj;
+        if (this.gender == null) {
+            if (other.gender != null)
+                return false;
+        }
+        else if (!this.gender.equals(other.gender))
+            return false;
         if (this.registerDtm == null) {
             if (other.registerDtm != null)
                 return false;
@@ -179,6 +196,7 @@ public class Member implements Serializable {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
+        result = prime * result + ((this.gender == null) ? 0 : this.gender.hashCode());
         result = prime * result + ((this.registerDtm == null) ? 0 : this.registerDtm.hashCode());
         result = prime * result + ((this.updaterDtm == null) ? 0 : this.updaterDtm.hashCode());
         result = prime * result + ((this.id == null) ? 0 : this.id.hashCode());
@@ -194,7 +212,8 @@ public class Member implements Serializable {
     public String toString() {
         StringBuilder sb = new StringBuilder("Member (");
 
-        sb.append(registerDtm);
+        sb.append(gender);
+        sb.append(", ").append(registerDtm);
         sb.append(", ").append(updaterDtm);
         sb.append(", ").append(id);
         sb.append(", ").append(idNumber);
