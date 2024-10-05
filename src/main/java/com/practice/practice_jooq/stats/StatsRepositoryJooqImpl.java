@@ -54,5 +54,20 @@ public class StatsRepositoryJooqImpl implements StatsRepositoryJooq{
 			.groupBy(rollup(date(PURCHASE.REGISTER_DTM.toString()), MEMBER.GENDER))
 			.fetchInto(StatsDto.class);
 	}
+
+	@Override
+	public List<RankDto> selectRankSalesByAll(String standard, String kind) {
+		return dsl.select(
+					PRODUCT.NAME
+					, sum(PURCHASE.COUNT)
+					, rank().over(orderBy(sum(PURCHASE.COUNT).desc()))
+				)
+				.from(PURCHASE)
+				.join(PRODUCT)
+					.on(PURCHASE.PRODUCT_ID.eq(PRODUCT.ID))
+				.groupBy(PURCHASE.PRODUCT_ID)
+				.orderBy(rank().over(orderBy(sum(PURCHASE.COUNT).desc())))
+				.fetchInto(RankDto.class);
+	}
 	
 }
