@@ -58,8 +58,8 @@ public class StatsRepositoryJooqImpl implements StatsRepositoryJooq{
 	@Override
 	public List<RankDto> selectRankSalesByAll(String standard, String kind) {
 		return dsl.select(
-					PRODUCT.NAME
-					, sum(PURCHASE.COUNT)
+					PRODUCT.NAME.as("productName")
+					, sum(PURCHASE.COUNT).as("sales")
 					, rank().over(orderBy(sum(PURCHASE.COUNT).desc()))
 				)
 				.from(PURCHASE)

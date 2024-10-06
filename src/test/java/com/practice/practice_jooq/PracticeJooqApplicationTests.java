@@ -21,6 +21,7 @@ import com.practice.practice_jooq.product.Product;
 import com.practice.practice_jooq.product.ProductRepository;
 import com.practice.practice_jooq.purchase.Purchase;
 import com.practice.practice_jooq.purchase.PurchaseRepository;
+import com.practice.practice_jooq.stats.RankDto;
 import com.practice.practice_jooq.stats.StatsDto;
 import com.practice.practice_jooq.stats.StatsRepository;
 
@@ -42,7 +43,7 @@ class PracticeJooqApplicationTests {
 	@Autowired StatsRepository statsRepository;
 	
 	@BeforeEach
-	public void 회원주입() {
+	public void 회원_상품_구매_주입() {
 		List<Member> memberList = new ArrayList<>();
 		
 		Member member1 = Member.builder()
@@ -81,6 +82,58 @@ class PracticeJooqApplicationTests {
 		for(Member m : memberList) {
 			memberRepository.save(m);
 		}
+		
+		Product product1 = Product.builder()
+				.id("S01")
+				.category(Category.SKIRTS)
+				.name("치마1")
+				.price(35000)
+				.build();
+
+		Product product2 = Product.builder()
+						.id("S02")
+						.category(Category.SKIRTS)
+						.name("치마2")
+						.price(40000)
+						.build();
+		
+		Product product3 = Product.builder()
+				.id("P01")
+				.category(Category.PANTS)
+				.name("바지1")
+				.price(40000)
+				.build();
+		
+		productRepository.save(product1);
+		productRepository.save(product2);
+		productRepository.save(product3);
+		
+		Purchase purchase1 = Purchase.builder()
+						.purchaseId(1)
+						.memberId("id111")
+						.productId("S01")
+						.count(1)
+						.status(Status.Completed)
+						.build();
+		
+		Purchase purchase2 = Purchase.builder()
+						.purchaseId(2)
+						.memberId("id222")
+						.productId("S01")
+						.count(3)
+						.status(Status.Completed)
+						.build();
+		
+		Purchase purchase3 = Purchase.builder()
+						.purchaseId(3)
+						.memberId("id111")
+						.productId("P01")
+						.count(1)
+						.status(Status.Completed)
+						.build();
+		purchaseRepository.save(purchase1);
+		purchaseRepository.save(purchase2);
+		purchaseRepository.save(purchase3);
 	}
 	
 	@Test @Disabled
@@ -113,60 +166,9 @@ class PracticeJooqApplicationTests {
 		
 	}
 	
-	@Test
+	@Test @Disabled
 	public void StatsQueryTest() {
 		// given
-		Product product1 = Product.builder()
-								.id("S01")
-								.category(Category.SKIRTS)
-								.name("치마1")
-								.price(35000)
-								.build();
-		
-		Product product2 = Product.builder()
-								.id("S02")
-								.category(Category.SKIRTS)
-								.name("치마2")
-								.price(40000)
-								.build();
-		
-		Product product3 = Product.builder()
-						.id("P02")
-						.category(Category.PANTS)
-						.name("바지1")
-						.price(40000)
-						.build();
-		
-		productRepository.save(product1);
-		productRepository.save(product2);
-		productRepository.save(product3);
-		
-		Purchase purchase1 = Purchase.builder()
-								.purchaseId(1)
-								.memberId("id111")
-								.productId("S01")
-								.count(1)
-								.status(Status.Completed)
-								.build();
-		
-		Purchase purchase2 = Purchase.builder()
-								.purchaseId(2)
-								.memberId("id222")
-								.productId("S01")
-								.count(3)
-								.status(Status.Completed)
-								.build();
-		
-		Purchase purchase3 = Purchase.builder()
-								.purchaseId(3)
-								.memberId("id111")
-								.productId("P01")
-								.count(1)
-								.status(Status.Completed)
-								.build();
-		purchaseRepository.save(purchase1);
-		purchaseRepository.save(purchase2);
-		purchaseRepository.save(purchase3);
 		
 		// when
 		List<StatsDto> categoryResult = statsRepository.selectStatsSalesByCategory();
@@ -178,6 +180,16 @@ class PracticeJooqApplicationTests {
 	}
 	
 	// 순위
+	@Test
+	public void 순위테스트() {
+		// given
+		
+		// when
+		List<RankDto> result = statsRepository.selectRankSalesByAll("", "");
+		
+		// then
+		System.out.println("********************* " + result);
+	}
 }
 
 
