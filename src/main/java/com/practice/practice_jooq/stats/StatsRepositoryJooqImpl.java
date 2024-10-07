@@ -7,17 +7,22 @@ import static com.practice.practice_jooq.generated.tables.Product.PRODUCT;
 // view 생성 후 J 클래스 정상 생성
 
 import static com.practice.practice_jooq.generated.tables.Purchase.PURCHASE;
-
 // rollup 등
-import static org.jooq.impl.DSL.*;
+import static org.jooq.impl.DSL.date;
+import static org.jooq.impl.DSL.if_;
+import static org.jooq.impl.DSL.orderBy;
+import static org.jooq.impl.DSL.rank;
+import static org.jooq.impl.DSL.rollup;
+import static org.jooq.impl.DSL.sum;
 
 import java.util.List;
 
 import org.jooq.DSLContext;
 
+import com.practice.practice_jooq.base.BaseJooqRepository;
 import com.practice.practice_jooq.generated.enums.PurchaseStatus;
 
-public class StatsRepositoryJooqImpl implements StatsRepositoryJooq{
+public class StatsRepositoryJooqImpl implements StatsRepositoryJooq, BaseJooqRepository{
 
 	private final DSLContext dsl;
 
@@ -65,6 +70,9 @@ public class StatsRepositoryJooqImpl implements StatsRepositoryJooq{
 				.from(PURCHASE)
 				.join(PRODUCT)
 					.on(PURCHASE.PRODUCT_ID.eq(PRODUCT.ID))
+				.where(
+//					inIfNotEmpty(PRODUCT.CATEGORY, kind)
+				)
 				.groupBy(PURCHASE.PRODUCT_ID)
 				.orderBy(rank().over(orderBy(sum(PURCHASE.COUNT).desc())))
 				.fetchInto(RankDto.class);
