@@ -185,7 +185,7 @@ class PracticeJooqApplicationTests {
 		// given
 		
 		// when
-		List<RankDto> result = statsRepository.selectRankSalesByAll("", "");
+		List<RankDto> result = statsRepository.selectRankSalesByAll("", "PANTS");
 		
 		// then
 		System.out.println("********************* " + result);

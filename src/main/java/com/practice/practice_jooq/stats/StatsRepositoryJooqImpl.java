@@ -20,6 +20,7 @@ import java.util.List;
 import org.jooq.DSLContext;
 
 import com.practice.practice_jooq.base.BaseJooqRepository;
+import com.practice.practice_jooq.base.TextSearchWildcard;
 import com.practice.practice_jooq.generated.enums.PurchaseStatus;
 
 public class StatsRepositoryJooqImpl implements StatsRepositoryJooq, BaseJooqRepository{
@@ -71,7 +72,7 @@ public class StatsRepositoryJooqImpl implements StatsRepositoryJooq, BaseJooqRep
 				.join(PRODUCT)
 					.on(PURCHASE.PRODUCT_ID.eq(PRODUCT.ID))
 				.where(
-//					inIfNotEmpty(PRODUCT.CATEGORY, kind)
+						likeIfNotEmpty(PRODUCT.CATEGORY, kind, TextSearchWildcard.NONE)
 				)
 				.groupBy(PURCHASE.PRODUCT_ID)
 				.orderBy(rank().over(orderBy(sum(PURCHASE.COUNT).desc())))

@@ -2,6 +2,7 @@ package com.practice.practice_jooq.base;
 
 import java.util.List;
 
+import org.antlr.v4.runtime.misc.NotNull;
 import org.jooq.Condition;
 import org.jooq.Record;
 import org.jooq.TableField;
@@ -13,6 +14,7 @@ import io.micrometer.common.util.StringUtils;
 // 출처 https://github.com/SightStudio/blog-code/blob/develop/jooq-advanced/src/main/java/com/sightstudio/jooq/config/jooq/BaseJooqRepository.java#L14
 
 public interface BaseJooqRepository {
+	
     default Condition inIfNotEmpty(TableField<? extends Record, Integer> columnVal, List<Integer> paramVal) {
         if(CollectionUtils.isEmpty(paramVal)) {
             return DSL.noCondition();	// jooq where절에서 이를 리턴하면 조건에서 제외된다
@@ -20,12 +22,13 @@ public interface BaseJooqRepository {
         return columnVal.in(paramVal);
     }
 
-    default Condition likeIfNotEmpty(TableField<? extends Record, String> column, String searchInput, TextSearchWildcard searchWildcard) {
+															// String -> T로 바꿔서 enum도 쓸 수 있도록
+    default <T> Condition likeIfNotEmpty(TableField<? extends Record, T> column, String searchInput, TextSearchWildcard searchWildcard) {
 
         if(StringUtils.isBlank(searchInput)) {
             return DSL.noCondition();
         }
-
+        
         switch (searchWildcard) {
             case FULL_TEXT:
                 return column.like("%" + searchInput + "%");
@@ -34,7 +37,7 @@ public interface BaseJooqRepository {
             case SUFFIX:
                 return column.like(searchInput + "%");
             case NONE:
-                return column.eq(searchInput);
+                return column.eq((T) searchInput);
         }
 
         return DSL.noCondition();
@@ -43,4 +46,8 @@ public interface BaseJooqRepository {
     default Condition likeIfNotEmpty(TableField<? extends Record, String> column, String searchInput) {
         return likeIfNotEmpty(column, searchInput, TextSearchWildcard.NONE);
     }
+    
+//    default Condition eqIfNotEmpty(TableField<? extends Record, String> column, String searchInput) {
+//		return DSL.noCondition();
+//	}
 }

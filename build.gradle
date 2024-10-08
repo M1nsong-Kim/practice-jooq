@@ -70,7 +70,7 @@ jooq {
 	                generate {
 	                    relations = true
 	                    deprecated = false
-	                    records = true
+	                    records = false			// j클래스에서 TableField<ProductRecord, String>가 아닌 TableField<Record, String>로 생성
 	                    immutablePojos = true
 	                    fluentSetters = true
 	                }
