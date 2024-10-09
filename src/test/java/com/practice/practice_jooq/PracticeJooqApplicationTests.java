@@ -14,6 +14,7 @@ import com.practice.practice_jooq.categories.Category;
 import com.practice.practice_jooq.categories.Grade;
 import com.practice.practice_jooq.categories.Role;
 import com.practice.practice_jooq.categories.Status;
+import com.practice.practice_jooq.categories.TimePeriod;
 import com.practice.practice_jooq.member.Member;
 import com.practice.practice_jooq.member.MemberDto;
 import com.practice.practice_jooq.member.MemberRepository;
@@ -185,7 +186,7 @@ class PracticeJooqApplicationTests {
 		// given
 		
 		// when
-		List<RankDto> result = statsRepository.selectRankSalesByAll("", "PANTS");
+		List<RankDto> result = statsRepository.selectRankSalesByAll(TimePeriod.NONE, "PANTS");
 		
 		// then
 		System.out.println("********************* " + result);

@@ -1,4 +1,4 @@
-package com.practice.practice_jooq.base;
+package com.practice.practice_jooq.categories;
 
 
 // 출처 https://github.com/SightStudio/blog-code/blob/develop/jooq-advanced/src/main/java/com/sightstudio/jooq/config/jooq/TextSearchWildcard.java

@@ -1,13 +1,17 @@
 package com.practice.practice_jooq.base;
 
+import static org.jooq.impl.DSL.*;
+
+import java.time.LocalDateTime;
 import java.util.List;
 
-import org.antlr.v4.runtime.misc.NotNull;
 import org.jooq.Condition;
 import org.jooq.Record;
 import org.jooq.TableField;
-import org.jooq.impl.DSL;
 import org.springframework.util.CollectionUtils;
+
+import com.practice.practice_jooq.categories.TextSearchWildcard;
+import com.practice.practice_jooq.categories.TimePeriod;
 
 import io.micrometer.common.util.StringUtils;
 
@@ -17,7 +21,7 @@ public interface BaseJooqRepository {
 	
     default Condition inIfNotEmpty(TableField<? extends Record, Integer> columnVal, List<Integer> paramVal) {
         if(CollectionUtils.isEmpty(paramVal)) {
-            return DSL.noCondition();	// jooq where절에서 이를 리턴하면 조건에서 제외된다
+            return noCondition();	// jooq where절에서 이를 리턴하면 조건에서 제외된다
         }
         return columnVal.in(paramVal);
     }
@@ -26,7 +30,7 @@ public interface BaseJooqRepository {
     default <T> Condition likeIfNotEmpty(TableField<? extends Record, T> column, String searchInput, TextSearchWildcard searchWildcard) {
 
         if(StringUtils.isBlank(searchInput)) {
-            return DSL.noCondition();
+            return noCondition();
         }
         
         switch (searchWildcard) {
@@ -40,7 +44,7 @@ public interface BaseJooqRepository {
                 return column.eq((T) searchInput);
         }
 
-        return DSL.noCondition();
+        return noCondition();
     }
 
     default Condition likeIfNotEmpty(TableField<? extends Record, String> column, String searchInput) {
@@ -50,4 +54,26 @@ public interface BaseJooqRepository {
 //    default Condition eqIfNotEmpty(TableField<? extends Record, String> column, String searchInput) {
 //		return DSL.noCondition();
 //	}
+    
+    // 기간
+    default Condition PeriodIfNotEmpty(TableField<? extends Record, String> column, TimePeriod standard) {
+    	if(standard == null) {
+            return noCondition();
+        }
+
+    	LocalDateTime today = LocalDateTime.now();
+    	
+    	switch(standard) {
+    		case YEAR:
+    			return year(column).eq(today.getYear());
+    		case MONTH:
+    			return month(column).eq(today.getMonthValue());
+    		case DAY:
+    			return day(column).eq(today.getDayOfMonth());
+    		case HOUR:
+    			return hour(column).eq(today.getHour());
+    	}
+    	
+    	return noCondition();
+    }
 }

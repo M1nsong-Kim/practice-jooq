@@ -20,7 +20,8 @@ import java.util.List;
 import org.jooq.DSLContext;
 
 import com.practice.practice_jooq.base.BaseJooqRepository;
-import com.practice.practice_jooq.base.TextSearchWildcard;
+import com.practice.practice_jooq.categories.TextSearchWildcard;
+import com.practice.practice_jooq.categories.TimePeriod;
 import com.practice.practice_jooq.generated.enums.PurchaseStatus;
 
 public class StatsRepositoryJooqImpl implements StatsRepositoryJooq, BaseJooqRepository{
@@ -61,8 +62,9 @@ public class StatsRepositoryJooqImpl implements StatsRepositoryJooq, BaseJooqRep
 			.fetchInto(StatsDto.class);
 	}
 
+	// https://hungseong.tistory.com/89 추후 매개변수 고민 생기면 다시 보기
 	@Override
-	public List<RankDto> selectRankSalesByAll(String standard, String kind) {
+	public List<RankDto> selectRankSalesByAll(TimePeriod standard, String kind) {
 		return dsl.select(
 					PRODUCT.NAME.as("productName")
 					, sum(PURCHASE.COUNT).as("sales")
@@ -72,6 +74,7 @@ public class StatsRepositoryJooqImpl implements StatsRepositoryJooq, BaseJooqRep
 				.join(PRODUCT)
 					.on(PURCHASE.PRODUCT_ID.eq(PRODUCT.ID))
 				.where(
+						// 
 						likeIfNotEmpty(PRODUCT.CATEGORY, kind, TextSearchWildcard.NONE)
 				)
 				.groupBy(PURCHASE.PRODUCT_ID)
