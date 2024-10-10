@@ -2,6 +2,7 @@ package com.practice.practice_jooq.stats;
 
 import java.util.List;
 
+import com.practice.practice_jooq.categories.TextSearchWildcard;
 import com.practice.practice_jooq.categories.TimePeriod;
 
 public interface StatsRepositoryJooq {

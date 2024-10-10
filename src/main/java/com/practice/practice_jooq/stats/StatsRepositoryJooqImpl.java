@@ -68,7 +68,7 @@ public class StatsRepositoryJooqImpl implements StatsRepositoryJooq, BaseJooqRep
 		return dsl.select(
 					PRODUCT.NAME.as("productName")
 					, sum(PURCHASE.COUNT).as("sales")
-					, rank().over(orderBy(sum(PURCHASE.COUNT).desc()))
+					, rank().over(orderBy(sum(PURCHASE.COUNT).desc())).as("rank")
 				)
 				.from(PURCHASE)
 				.join(PRODUCT)
