@@ -74,8 +74,8 @@ public class StatsRepositoryJooqImpl implements StatsRepositoryJooq, BaseJooqRep
 				.join(PRODUCT)
 					.on(PURCHASE.PRODUCT_ID.eq(PRODUCT.ID))
 				.where(
-						// 
 						likeIfNotEmpty(PRODUCT.CATEGORY, kind, TextSearchWildcard.NONE)
+//						, PeriodIfNotEmpty(PRODUCT.)
 				)
 				.groupBy(PURCHASE.PRODUCT_ID)
 				.orderBy(rank().over(orderBy(sum(PURCHASE.COUNT).desc())))
