@@ -187,7 +187,7 @@ class PracticeJooqApplicationTests {
 		// given
 		
 		// when
-		List<RankDto> result = statsRepository.selectRankSalesByAll(TimePeriod.NONE, "SKIRTS");
+		List<RankDto> result = statsRepository.selectRankSalesByAll(TimePeriod.YEAR, "SKIRTS");
 		
 		// then
 		System.out.println("********************* " + result);

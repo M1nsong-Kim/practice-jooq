@@ -8,6 +8,8 @@ import com.practice.practice_jooq.generated.Jooq;
 import com.practice.practice_jooq.generated.Keys;
 import com.practice.practice_jooq.generated.enums.ProductCategory;
 
+import java.time.LocalDateTime;
+
 import org.jooq.Field;
 import org.jooq.ForeignKey;
 import org.jooq.Name;
@@ -62,6 +64,16 @@ public class Product extends TableImpl<Record> {
      * The column <code>jooq.product.category</code>.
      */
     public final TableField<Record, ProductCategory> CATEGORY = createField(DSL.name("category"), SQLDataType.VARCHAR(7).defaultValue(DSL.field(DSL.raw("NULL"), SQLDataType.VARCHAR)).asEnumDataType(com.practice.practice_jooq.generated.enums.ProductCategory.class), this, "");
+
+    /**
+     * The column <code>jooq.product.created_at</code>.
+     */
+    public final TableField<Record, LocalDateTime> CREATED_AT = createField(DSL.name("created_at"), SQLDataType.LOCALDATETIME(0).defaultValue(DSL.field(DSL.raw("NULL"), SQLDataType.LOCALDATETIME)), this, "");
+
+    /**
+     * The column <code>jooq.product.updated_at</code>.
+     */
+    public final TableField<Record, LocalDateTime> UPDATED_AT = createField(DSL.name("updated_at"), SQLDataType.LOCALDATETIME(0).defaultValue(DSL.field(DSL.raw("NULL"), SQLDataType.LOCALDATETIME)), this, "");
 
     private Product(Name alias, Table<Record> aliased) {
         this(alias, aliased, null);

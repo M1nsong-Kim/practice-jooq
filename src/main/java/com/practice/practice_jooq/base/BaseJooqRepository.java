@@ -56,7 +56,7 @@ public interface BaseJooqRepository {
 //	}
     
     // 기간
-    default Condition PeriodIfNotEmpty(TableField<? extends Record, String> column, TimePeriod standard) {
+    default <T> Condition PeriodIfNotEmpty(TableField<? extends Record, T> column, TimePeriod standard) {
     	if(standard == null) {
             return noCondition();
         }

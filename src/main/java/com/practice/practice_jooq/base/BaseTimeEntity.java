@@ -16,9 +16,10 @@ import lombok.Getter;
 @EntityListeners(AuditingEntityListener.class)	// 해당 어노테이션 넣는 게 귀찮으면 META_INF/orm.xml에 소스 추가하는 방법도 있다
 public abstract class BaseTimeEntity {
 	@CreatedDate 
-	@Column(updatable = false)
-	private LocalDateTime register_dtm;
+	@Column(name="created_at", updatable = false)
+	private LocalDateTime createdAt;
 
 	@LastModifiedDate 
-	private LocalDateTime updater_dtm;
+	@Column(name="updated_at")
+	private LocalDateTime updatedAt;
 }

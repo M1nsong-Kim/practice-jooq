@@ -7,6 +7,7 @@ package com.practice.practice_jooq.generated.tables.pojos;
 import com.practice.practice_jooq.generated.enums.ProductCategory;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 
 /**
@@ -21,24 +22,32 @@ public class Product implements Serializable {
     private final String id;
     private final String name;
     private final ProductCategory category;
+    private final LocalDateTime createdAt;
+    private final LocalDateTime updatedAt;
 
     public Product(Product value) {
         this.price = value.price;
         this.id = value.id;
         this.name = value.name;
         this.category = value.category;
+        this.createdAt = value.createdAt;
+        this.updatedAt = value.updatedAt;
     }
 
     public Product(
         Integer price,
         String id,
         String name,
-        ProductCategory category
+        ProductCategory category,
+        LocalDateTime createdAt,
+        LocalDateTime updatedAt
     ) {
         this.price = price;
         this.id = id;
         this.name = name;
         this.category = category;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
     /**
@@ -67,6 +76,20 @@ public class Product implements Serializable {
      */
     public ProductCategory getCategory() {
         return this.category;
+    }
+
+    /**
+     * Getter for <code>jooq.product.created_at</code>.
+     */
+    public LocalDateTime getCreatedAt() {
+        return this.createdAt;
+    }
+
+    /**
+     * Getter for <code>jooq.product.updated_at</code>.
+     */
+    public LocalDateTime getUpdatedAt() {
+        return this.updatedAt;
     }
 
     @Override
@@ -102,6 +125,18 @@ public class Product implements Serializable {
         }
         else if (!this.category.equals(other.category))
             return false;
+        if (this.createdAt == null) {
+            if (other.createdAt != null)
+                return false;
+        }
+        else if (!this.createdAt.equals(other.createdAt))
+            return false;
+        if (this.updatedAt == null) {
+            if (other.updatedAt != null)
+                return false;
+        }
+        else if (!this.updatedAt.equals(other.updatedAt))
+            return false;
         return true;
     }
 
@@ -113,6 +148,8 @@ public class Product implements Serializable {
         result = prime * result + ((this.id == null) ? 0 : this.id.hashCode());
         result = prime * result + ((this.name == null) ? 0 : this.name.hashCode());
         result = prime * result + ((this.category == null) ? 0 : this.category.hashCode());
+        result = prime * result + ((this.createdAt == null) ? 0 : this.createdAt.hashCode());
+        result = prime * result + ((this.updatedAt == null) ? 0 : this.updatedAt.hashCode());
         return result;
     }
 
@@ -124,6 +161,8 @@ public class Product implements Serializable {
         sb.append(", ").append(id);
         sb.append(", ").append(name);
         sb.append(", ").append(category);
+        sb.append(", ").append(createdAt);
+        sb.append(", ").append(updatedAt);
 
         sb.append(")");
         return sb.toString();
